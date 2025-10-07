@@ -1,0 +1,90 @@
+{
+  "catrAnalysisCompleted": "boolean",
+  "lastADXUpdate": "string (ISO-8601)",
+  "lastCAtrUpdate": "string (ISO-8601)",
+  "lastFinalScoreUpdate": "string (ISO-8601)",
+  "lastMomentumUpdate": "string (ISO-8601)",
+  "lastRRUpdate": "string (ISO-8601)",
+  "lastUpdate": "string (ISO-8601)",
+  "momentumAnalysisCompleted": "boolean",
+
+  "results": [
+    {
+      "LongAdxScore": "number",
+      "LongAtrPriceScore": "number",
+      "LongMomentumScore": "number",
+      "LongSpyScore": "number",
+      "adxScore": "number",
+      "adxValue": "number",
+      "atrRatio": "number",
+      "atrValue": "number",
+      "calculationDate": "string",
+      "candleDate": "string",
+      "candleScore": "number",
+      "catrAnalysisCompleted": "boolean",
+      "crossoverType": "string",
+      "currentPrice": "number",
+      "entryPrice": "number",
+      "finalScore": "number",
+      "finalSignal": "string",
+      "lastADXUpdate": "string",
+      "lastCAtrUpdate": "string",
+      "lastFinalScoreUpdate": "string",
+      "lastMomentumUpdate": "string",
+      "lastUpdated": "string",
+      "macdHistogram": "number",
+      "momentumAnalysisCompleted": "boolean",
+      "momentumAnalysisDate": "string",
+      "momentumScore": "number",
+      "name": "string",
+      "previousPrice": "number",
+      "prices": {
+        "day_1": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_2": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_3": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_4": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_5": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" }
+      },
+      "relativeStrength": "number",
+      "rewardDollar": "number",
+      "riskDollar": "number",
+      "rrAnalysisCompleted": "boolean",
+      "rrApproved": "boolean",
+      "rrConfidence": "number",
+      "rrMethod": "string",
+      "rrRatio": "number",
+      "spyReturn": "number",
+      "stockReturn": "number",
+      "stopLoss": "number",
+      "symbol": "string",
+      "takeProfit": "number",
+      "tradeStatus": "string",
+      "trendAnalysisCompleted": "boolean",
+      "trendAnalysisDate": "string",
+      "trendStrength": "string",
+      "volatilityAnalysisDate": "string"
+    }
+  ],
+
+  "rrAnalysisCompleted": "boolean",
+  "rrAnalysisStats": {
+    "approvedTrades": "number",
+    "avgRRR": "number"
+  },
+
+  "signals": {
+    "long": "number",
+    "neutral": "number",
+    "short": "number"
+  },
+
+  "spyData": {
+    "currentPrice": "number",
+    "previousPrice": "number",
+    "return": "number"
+  },
+
+  "totalStocks": "number",
+  "trendAnalysisCompleted": "boolean",
+  "version": "string"
+}

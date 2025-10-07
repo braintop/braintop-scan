@@ -1,0 +1,133 @@
+{
+  "catrAnalysisCompleted": "boolean",
+  "marketStructureAnalysisCompleted": "boolean [NEW - שלב F]",
+  "lastADXUpdate": "string (ISO-8601)",
+  "lastCAtrUpdate": "string (ISO-8601)",
+  "lastFinalScoreUpdate": "string (ISO-8601)",
+  "lastMarketStructureUpdate": "string (ISO-8601) [NEW - שלב F]",
+  "lastMomentumUpdate": "string (ISO-8601)",
+  "lastRRUpdate": "string (ISO-8601)",
+  "lastUpdate": "string (ISO-8601)",
+  "momentumAnalysisCompleted": "boolean",
+
+  "results": [
+    {
+      "LongAdxScore": "number",
+      "LongAtrPriceScore": "number",
+      "LongMomentumScore": "number",
+      "LongSpyScore": "number",
+      "adxScore": "number",
+      "adxValue": "number",
+      "atrRatio": "number",
+      "atrValue": "number",
+      "calculationDate": "string",
+      "candleDate": "string",
+      "candleScore": "number",
+      "catrAnalysisCompleted": "boolean",
+      "crossoverType": "string",
+      "currentPrice": "number",
+      "entryPrice": "number",
+      "finalScore": "number",
+      "finalSignal": "string",
+      "lastADXUpdate": "string",
+      "lastCAtrUpdate": "string",
+      "lastFinalScoreUpdate": "string",
+      "lastMarketStructureUpdate": "string [NEW - שלב F]",
+      "lastMomentumUpdate": "string",
+      "lastUpdated": "string",
+      "macdHistogram": "number",
+      "marketStructure": {
+        "supportLevels": {
+          "primary": "number [NEW - שלב F]",
+          "secondary": "number [NEW - שלב F]", 
+          "tertiary": "number [NEW - שלב F]",
+          "strength": "number [NEW - שלב F]",
+          "type": "string [NEW - שלב F]"
+        },
+        "resistanceLevels": {
+          "primary": "number [NEW - שלב F]",
+          "secondary": "number [NEW - שלב F]",
+          "tertiary": "number [NEW - שלב F]", 
+          "strength": "number [NEW - שלב F]",
+          "type": "string [NEW - שלב F]"
+        },
+        "maLevels": {
+          "sma20": "number [NEW - שלב F]",
+          "sma50": "number [NEW - שלב F]",
+          "sma200": "number [NEW - שלב F]"
+        },
+        "pivotPoints": {
+          "pp": "number [NEW - שלב F]",
+          "r1": "number [NEW - שלב F]",
+          "r2": "number [NEW - שלב F]",
+          "s1": "number [NEW - שלב F]",
+          "s2": "number [NEW - שלב F]"
+        },
+        "volumeAnalysis": {
+          "avgVolume": "number [NEW - שלב F]",
+          "highVolumeLevels": "number[] [NEW - שלב F]",
+          "volumeStrength": "number [NEW - שלב F]"
+        },
+        "summary": {
+          "trend": "string [NEW - שלב F]",
+          "strength": "number [NEW - שלב F]",
+          "confidence": "number [NEW - שלב F]"
+        }
+      },
+      "marketStructureAnalysisCompleted": "boolean [NEW - שלב F]",
+      "marketStructureAnalysisDate": "string [NEW - שלב F]",
+      "momentumAnalysisCompleted": "boolean",
+      "momentumAnalysisDate": "string",
+      "momentumScore": "number",
+      "name": "string",
+      "previousPrice": "number",
+      "prices": {
+        "day_1": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_2": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_3": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_4": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" },
+        "day_5": { "date": "string", "high": "number", "low": "number", "open": "number", "price": "number", "volume": "number" }
+      },
+      "relativeStrength": "number",
+      "rewardDollar": "number",
+      "riskDollar": "number",
+      "rrAnalysisCompleted": "boolean",
+      "rrApproved": "boolean",
+      "rrConfidence": "number",
+      "rrMethod": "string",
+      "rrRatio": "number",
+      "spyReturn": "number",
+      "stockReturn": "number",
+      "stopLoss": "number [UPDATED - שלב F]",
+      "symbol": "string",
+      "takeProfit": "number [UPDATED - שלב F]",
+      "tradeStatus": "string",
+      "trendAnalysisCompleted": "boolean",
+      "trendAnalysisDate": "string",
+      "trendStrength": "string [UPDATED - שלב F]",
+      "volatilityAnalysisDate": "string"
+    }
+  ],
+
+  "rrAnalysisCompleted": "boolean",
+  "rrAnalysisStats": {
+    "approvedTrades": "number",
+    "avgRRR": "number"
+  },
+
+  "signals": {
+    "long": "number",
+    "neutral": "number",
+    "short": "number"
+  },
+
+  "spyData": {
+    "currentPrice": "number",
+    "previousPrice": "number",
+    "return": "number"
+  },
+
+  "totalStocks": "number",
+  "trendAnalysisCompleted": "boolean",
+  "version": "string"
+}

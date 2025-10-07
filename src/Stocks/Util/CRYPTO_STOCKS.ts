@@ -1,0 +1,10 @@
+export let CRYPTO_STOCKS = ['BTC', 'ETH', 'USDT', 'XRP', 'BNB', 'SOL', 'USDC', 'ADA', 'DOGE', 'TRX',
+    'PI', 'LEO', 'LINK', 'HBAR', 'XLM', 'AVAX', 'SUI', 'LTC', 'BCH', 'SHIB',
+    'TON', 'DOT', 'OM', 'USDe', 'DAI', 'BGB', 'HYPE', 'XMR', 'UNI', 'APT',
+    'NEAR', 'ONDO', 'AAVE', 'ETC', 'ICP', 'PEPE', 'OKB', 'MNT', 'CRO', 'TRUMP',
+    'VET', 'TAO', 'FDUSD', 'POL', 'FIL', 'ALGO', 'TIA', 'GT', 'KAS', 'RENDER',
+    'ARB', 'DEXE', 'ATOM', 'OP', 'ENA', 'KCS', 'JUP', 'S', 'FET', 'IP', 'MOVE',
+    'XDC', 'MKR', 'INJ', 'SEI', 'STX', 'QNT', 'FLR', 'LDO', 'THETA', 'IMX',
+    'WLD', 'GRT', 'BONK', 'EOS', 'PYUSD', 'XTZ', 'XAUt', 'NEXO', 'BTT', 'JASMY',
+    'SAND', 'JTO', 'IOTA', 'KAIA', 'BSV', 'ENS', 'BERA', 'FLOW', 'PAXG', 'GALA',
+    'FLOKI', 'NEO', 'PYTH', 'EGLD', 'MANA', 'HNT', 'RON', 'AXS', 'RAY']
