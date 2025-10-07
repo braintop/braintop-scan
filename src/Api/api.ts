@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { getFirestore, collection, getDocs, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+const firebaseConfig = {//add 
     apiKey: "AIzaSyDiDoxBzc1rZ_9Q63eGyt2GgoY5D9PNpzs",
     authDomain: "braintopai.firebaseapp.com",
     projectId: "braintopai",
