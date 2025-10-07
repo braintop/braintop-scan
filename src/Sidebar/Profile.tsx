@@ -1,5 +1,5 @@
 import { Box, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Tooltip, IconButton, Divider, Collapse } from '@mui/material';
-import { Person, ChevronLeft, ChevronRight, AccessTime, CalendarToday, CalendarViewWeek, CalendarMonth, ExpandLess, ExpandMore, Scanner, CloudDownload, Security, AttachMoney, SignalCellularAlt, Campaign, TrendingUp, Analytics, Delete, Assessment, Book, Timeline } from '@mui/icons-material';
+import { Person, ChevronLeft, ChevronRight, AccessTime, CalendarToday, CalendarViewWeek, CalendarMonth, ExpandLess, ExpandMore, Scanner, CloudDownload, Security, AttachMoney, SignalCellularAlt, Campaign, TrendingUp, Analytics, Delete, Assessment, Book, Timeline, QueryStats } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -20,6 +20,15 @@ export default function Profile({ isCollapsed = false, onToggle }: ProfileProps)
     };
 
     const timeFrequencies = [
+        {
+            key: 'min5',
+            icon: <QueryStats />,
+            text: 'Min5',
+            path: '/min5',
+            components: [
+                { icon: <QueryStats />, text: 'Dashboard', path: '/min5' }
+            ]
+        },
         {
             key: 'hourly',
             icon: <AccessTime />,

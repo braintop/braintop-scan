@@ -5,6 +5,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Home from '../Home/Home';
 import Profile from '../Profile/Profile';
+import { Min5Dashboard } from '../../Sidebar/Min5';
 
 // Hourly components
 import HourAScan from '../../Sidebar/Hour/HourAScan';
@@ -81,6 +82,9 @@ export default function Routing() {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="profile" element={<Profile />} />
+                
+                {/* Min5 Route */}
+                <Route path="min5" element={<Min5Dashboard />} />
                 
                 {/* Hourly Routes */}
                 <Route path="hourly" element={<HourAScan />} />
