@@ -564,4 +564,10 @@ ELSE:
 
 ---
 
+לא צריך. פוליגןם מספקים את ה sma macd  rsi נשאיר לסוף את adx .תראה לי פה פקודת curl לבקשת sma מפולגיון קרא sma @https://www.polygon.io/docs/rest/stocks/technical-indicators/simple-moving-average  קרא ema @https://www.polygon.io/docs/rest/stocks/technical-indicators/exponential-moving-average  קרא    מקדי @https://www.polygon.io/docs/rest/stocks/technical-indicators/moving-average-convergence-divergence  קרא rsi @https://www.polygon.io/docs/rest/stocks/technical-indicators/relative-strength-index 
 
+
+
+grep לבדוק שהקוד קיים
+curl לבדוק שהפונקציות עובדות
+אל תאמין לי סתם! 🎯

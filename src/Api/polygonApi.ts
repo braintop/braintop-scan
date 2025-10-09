@@ -3,7 +3,7 @@ const POLYGON_API_KEY = import.meta.env.VITE_POLYGON_API_KEY;
 const BASE_URL = 'https://api.polygon.io';
 
 // Debug: Check if API key is available
-console.log('🔑 Polygon API Key status:', POLYGON_API_KEY ? 'Available' : 'Missing');
+// Polygon API Key loaded
 if (!POLYGON_API_KEY) {
   console.error('❌ VITE_POLYGON_API_KEY is not set! Please add it to your .env file');
 }
@@ -162,12 +162,12 @@ async function polygonApiCall(endpoint: string, params: Record<string, any> = {}
     }
   });
 
-  console.log('🔗 Polygon API Call:', url.toString());
+  // Polygon API Call
 
   try {
     const response = await fetch(url.toString());
     
-    console.log('📡 API Response Status:', response.status, response.statusText);
+    // API Response Status
     
     if (!response.ok) {
       const errorText = await response.text();
@@ -181,7 +181,7 @@ async function polygonApiCall(endpoint: string, params: Record<string, any> = {}
       throw new Error(`Polygon API error: ${data.error || 'Unknown error'}`);
     }
     
-    console.log('✅ API Success:', data);
+    // API Success
     return data;
   } catch (error) {
     console.error('💥 Polygon API call failed:', error);
@@ -254,18 +254,18 @@ export async function getPreviousClose(ticker: string): Promise<PolygonPrevClose
 export async function getSnapshot(ticker: string): Promise<PolygonSnapshot | null> {
   try {
     // First try to get the most recent trade price
-    console.log(`🔍 Getting last trade for ${ticker}...`);
+    // Getting last trade
     const lastTradeData = await polygonApiCall(`/v1/last/stocks/${ticker}`);
     
     if (lastTradeData && lastTradeData.last && lastTradeData.last.price) {
-      console.log(`✅ Got last trade for ${ticker}: $${lastTradeData.last.price}`);
+      // console.log(`✅ Got last trade for ${ticker}: $${lastTradeData.last.price}`);
       
       // Also get the daily snapshot for volume and other data
       const snapshotData = await polygonApiCall(`/v2/snapshot/locale/us/markets/stocks/tickers/${ticker}`);
       
       if (snapshotData && snapshotData.ticker) {
         const ticker_data = snapshotData.ticker;
-        console.log(`✅ Got snapshot data for ${ticker}:`, ticker_data);
+        // console.log(`✅ Got snapshot data for ${ticker}:`, ticker_data);
         
         // Use last trade price as primary, fall back to snapshot data
         const currentPrice = lastTradeData.last.price || ticker_data.lastTrade?.p || ticker_data.day?.c || ticker_data.prevDay?.c;
@@ -342,21 +342,21 @@ export async function getSnapshot(ticker: string): Promise<PolygonSnapshot | nul
     
     // Fallback to previous close endpoint
     try {
-      console.log(`🔄 Falling back to previous close for ${ticker}...`);
+      // console.log(`🔄 Falling back to previous close for ${ticker}...`);
       // Try to get data from August 29, 2025 specifically
       const specificDate = '2025-08-29';
-      console.log(`📅 Trying to get ${ticker} data for ${specificDate}`);
+      // console.log(`📅 Trying to get ${ticker} data for ${specificDate}`);
       let prevData = await polygonApiCall(`/v2/aggs/ticker/${ticker}/range/1/day/${specificDate}/${specificDate}`);
       
       // If that fails, try the general previous close endpoint
       if (!prevData || !prevData.results || prevData.results.length === 0) {
-        console.log(`🔄 Specific date failed, trying general previous close for ${ticker}...`);
+        // console.log(`🔄 Specific date failed, trying general previous close for ${ticker}...`);
         prevData = await polygonApiCall(`/v2/aggs/ticker/${ticker}/prev`);
       }
       
       if (prevData && prevData.results && prevData.results.length > 0) {
         const result = prevData.results[0];
-        console.log(`✅ Got previous close for ${ticker}:`, result);
+        // console.log(`✅ Got previous close for ${ticker}:`, result);
         
         // Transform previous close to snapshot format with real data
         return {
@@ -394,12 +394,12 @@ export async function getSnapshot(ticker: string): Promise<PolygonSnapshot | nul
     
     // Try grouped aggregates for current market day as fallback
     try {
-      console.log(`🔄 Trying grouped aggregates for ${ticker}...`);
+      // console.log(`🔄 Trying grouped aggregates for ${ticker}...`);
       
       // Use September 8, 2025 (Sunday) as the latest trading day
       const lastTradingDay = new Date('2025-09-08');
       const dateStr = lastTradingDay.toISOString().split('T')[0];
-      console.log(`📅 Using specific trading date: ${dateStr} (Sunday, Sep 8, 2025)`);
+      // console.log(`📅 Using specific trading date: ${dateStr} (Sunday, Sep 8, 2025)`);
       
       const groupedData = await polygonApiCall(`/v2/aggs/grouped/locale/us/market/stocks/${dateStr}`);
       
@@ -408,7 +408,7 @@ export async function getSnapshot(ticker: string): Promise<PolygonSnapshot | nul
         const tickerData = groupedData.results.find((item: any) => item.T === ticker);
         
         if (tickerData) {
-          console.log(`✅ Found ${ticker} in grouped data:`, tickerData);
+          // console.log(`✅ Found ${ticker} in grouped data:`, tickerData);
           
           return {
             ticker: ticker,
@@ -464,7 +464,7 @@ export async function getBatchSnapshots(tickers: string[]): Promise<PolygonSnaps
     const tickerString = tickers.join(',');
     
     // Try different Polygon API endpoints for pre-market data
-    console.log('🔍 Trying pre-market data endpoint...');
+    // console.log('🔍 Trying pre-market data endpoint...');
     
     // Try multiple endpoints to get pre-market data
     let data;
@@ -474,9 +474,9 @@ export async function getBatchSnapshots(tickers: string[]): Promise<PolygonSnaps
       data = await polygonApiCall(`/v2/snapshot/locale/us/markets/stocks/tickers`, {
         'tickers': tickerString
       });
-      console.log('✅ Got data from main snapshot endpoint');
+      // console.log('✅ Got data from main snapshot endpoint');
     } catch (error) {
-      console.log('❌ Main snapshot endpoint failed, trying alternative...');
+      // console.log('❌ Main snapshot endpoint failed, trying alternative...');
       
       // Alternative: Try individual ticker snapshots
       const individualSnapshots = [];
@@ -487,30 +487,30 @@ export async function getBatchSnapshots(tickers: string[]): Promise<PolygonSnaps
             individualSnapshots.push(tickerData.ticker);
           }
         } catch (tickerError) {
-          console.log(`❌ Failed to get data for ${ticker}:`, tickerError);
+          // console.log(`❌ Failed to get data for ${ticker}:`, tickerError);
         }
       }
       data = { tickers: individualSnapshots };
-      console.log(`✅ Got ${individualSnapshots.length} individual snapshots`);
+      // console.log(`✅ Got ${individualSnapshots.length} individual snapshots`);
     }
     
-    console.log('🔍 Batch snapshots response structure:', Object.keys(data || {}));
-    console.log('🔍 Batch snapshots data:', data);
+    // console.log('🔍 Batch snapshots response structure:', Object.keys(data || {}));
+    // console.log('🔍 Batch snapshots data:', data);
     
     // Debug: Log first ticker structure if available
     if (data.tickers && data.tickers.length > 0) {
-        console.log('🔍 First ticker structure:', data.tickers[0]);
-        console.log('🔍 First ticker keys:', Object.keys(data.tickers[0] || {}));
+        // console.log('🔍 First ticker structure:', data.tickers[0]);
+        // console.log('🔍 First ticker keys:', Object.keys(data.tickers[0] || {}));
         
         // Check if we have pre-market data
         const firstTicker = data.tickers[0];
-        console.log('🔍 Pre-market data check:');
-        console.log('  - last_trade:', firstTicker.last_trade);
-        console.log('  - last_quote:', firstTicker.last_quote);
-        console.log('  - day:', firstTicker.day);
-        console.log('  - prev_day:', firstTicker.prev_day);
-        console.log('  - session:', firstTicker.session);
-        console.log('  - market_status:', firstTicker.market_status);
+        // console.log('🔍 Pre-market data check:');
+        // console.log('  - last_trade:', firstTicker.last_trade);
+        // console.log('  - last_quote:', firstTicker.last_quote);
+        // console.log('  - day:', firstTicker.day);
+        // console.log('  - prev_day:', firstTicker.prev_day);
+        // console.log('  - session:', firstTicker.session);
+        // console.log('  - market_status:', firstTicker.market_status);
     }
     
     // Polygon API returns 'tickers' array, not 'results'
@@ -547,7 +547,7 @@ export async function getPreMarketData(
   targetTimeET: string = '09:15'
 ): Promise<{price: number, volume: number, timestamp: number} | null> {
   try {
-    console.log(`🔍 Getting pre-market data for ${ticker} on ${date} at ${targetTimeET} ET...`);
+    // console.log(`🔍 Getting pre-market data for ${ticker} on ${date} at ${targetTimeET} ET...`);
     
     // Convert target time to timestamp
     // 09:15 ET = 14:15 UTC (EST = UTC-5 in winter, EDT = UTC-4 in summer)
@@ -556,7 +556,7 @@ export async function getPreMarketData(
     const targetDateTime = new Date(`${date}T${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00.000-05:00`);
     const targetTimestamp = targetDateTime.getTime();
     
-    console.log(`⏰ Target timestamp: ${targetTimestamp} (${targetDateTime.toISOString()})`);
+    // console.log(`⏰ Target timestamp: ${targetTimestamp} (${targetDateTime.toISOString()})`);
     
     // Get minute-by-minute data for the entire day with pre/post market
     const data = await polygonApiCall(`/v2/aggs/ticker/${ticker}/range/1/minute/${date}/${date}`, {
@@ -566,11 +566,11 @@ export async function getPreMarketData(
     });
     
     if (!data || !data.results || data.results.length === 0) {
-      console.log(`❌ No data found for ${ticker} on ${date}`);
+      // console.log(`❌ No data found for ${ticker} on ${date}`);
       return null;
     }
     
-    console.log(`📊 Found ${data.results.length} minute bars for ${ticker} on ${date}`);
+    // console.log(`📊 Found ${data.results.length} minute bars for ${ticker} on ${date}`);
     
     // Find the closest minute bar to our target time
     let closestBar = null;
@@ -586,12 +586,7 @@ export async function getPreMarketData(
     
     if (closestBar) {
       const actualTime = new Date(closestBar.t).toISOString();
-      console.log(`✅ Found closest bar for ${ticker}:`, {
-        timestamp: closestBar.t,
-        time: actualTime,
-        price: closestBar.c,
-        volume: closestBar.v
-      });
+      // Found closest bar
       
       return {
         price: closestBar.c,
@@ -600,11 +595,99 @@ export async function getPreMarketData(
       };
     }
     
-    console.log(`❌ No suitable bar found for ${ticker} at ${targetTimeET} ET`);
+    // console.log(`❌ No suitable bar found for ${ticker} at ${targetTimeET} ET`);
     return null;
     
   } catch (error) {
     console.error(`❌ Failed to get pre-market data for ${ticker}:`, error);
+    return null;
+  }
+}
+
+// Technical Indicators - SMA
+export async function getSMA(ticker: string, window: number = 20, timespan: string = 'day'): Promise<any> {
+  try {
+    const url = `${BASE_URL}/v1/indicators/sma/${ticker}?timespan=${timespan}&window=${window}&series_type=close&apikey=${POLYGON_API_KEY}`;
+    // console.log('📊 SMA API Call:', url);
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (response.ok && data.status === 'OK') {
+      // console.log('✅ SMA Success:', data);
+      return data;
+    } else {
+      console.error('❌ SMA Error:', data);
+      return null;
+    }
+  } catch (error) {
+    console.error(`❌ Failed to fetch SMA for ${ticker}:`, error);
+    return null;
+  }
+}
+
+// Technical Indicators - EMA
+export async function getEMA(ticker: string, window: number = 12, timespan: string = 'day'): Promise<any> {
+  try {
+    const url = `${BASE_URL}/v1/indicators/ema/${ticker}?timespan=${timespan}&window=${window}&series_type=close&apikey=${POLYGON_API_KEY}`;
+    // console.log('📊 EMA API Call:', url);
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (response.ok && data.status === 'OK') {
+      // console.log('✅ EMA Success:', data);
+      return data;
+    } else {
+      console.error('❌ EMA Error:', data);
+      return null;
+    }
+  } catch (error) {
+    console.error(`❌ Failed to fetch EMA for ${ticker}:`, error);
+    return null;
+  }
+}
+
+// Technical Indicators - MACD
+export async function getMACD(ticker: string, shortWindow: number = 12, longWindow: number = 26, signalWindow: number = 9, timespan: string = 'day'): Promise<any> {
+  try {
+    const url = `${BASE_URL}/v1/indicators/macd/${ticker}?timespan=${timespan}&short_window=${shortWindow}&long_window=${longWindow}&signal_window=${signalWindow}&series_type=close&apikey=${POLYGON_API_KEY}`;
+    // console.log('📊 MACD API Call:', url);
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (response.ok && data.status === 'OK') {
+      // console.log('✅ MACD Success:', data);
+      return data;
+    } else {
+      console.error('❌ MACD Error:', data);
+      return null;
+    }
+  } catch (error) {
+    console.error(`❌ Failed to fetch MACD for ${ticker}:`, error);
+    return null;
+  }
+}
+
+// Technical Indicators - RSI
+export async function getRSI(ticker: string, window: number = 14, timespan: string = 'day'): Promise<any> {
+  try {
+    const url = `${BASE_URL}/v1/indicators/rsi/${ticker}?timespan=${timespan}&window=${window}&series_type=close&apikey=${POLYGON_API_KEY}`;
+    // console.log('📊 RSI API Call:', url);
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (response.ok && data.status === 'OK') {
+      // console.log('✅ RSI Success:', data);
+      return data;
+    } else {
+      console.error('❌ RSI Error:', data);
+      return null;
+    }
+  } catch (error) {
+    console.error(`❌ Failed to fetch RSI for ${ticker}:`, error);
     return null;
   }
 }
@@ -619,5 +702,9 @@ export default {
   getBatchSnapshots,
   calculateAverageVolume,
   calculateSpread,
-  calculateDollarVolume
+  calculateDollarVolume,
+  getSMA,
+  getEMA,
+  getMACD,
+  getRSI
 };

@@ -30,6 +30,15 @@ export default function Profile({ isCollapsed = false, onToggle }: ProfileProps)
             ]
         },
         {
+            key: 'day1',
+            icon: <TrendingUp />,
+            text: 'Day1',
+            path: '/day1',
+            components: [
+                { icon: <TrendingUp />, text: 'Dashboard', path: '/day1' }
+            ]
+        },
+        {
             key: 'hourly',
             icon: <AccessTime />,
             text: 'Long Hourly',
